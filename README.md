@@ -8,8 +8,9 @@ A chess engine in a single Python file, packed to under 4 KB, for the make.fun
 `main.py` is a self-unpacking LZMA stub (the kit's `makefun compress` output)
 of a readable source file. The engine itself:
 
-- negamax alpha-beta search with PVS, iterative deepening and a fixed
-  120,000-node budget per move — no wall clock, fully deterministic
+- negamax alpha-beta search with PVS, null-move pruning, late-move
+  reductions, iterative deepening and a fixed 100,000-node budget per move —
+  no wall clock, fully deterministic
 - transposition table (persists across moves within a game), MVV-LVA capture
   ordering, quiescence search over captures, promotions and check evasions,
   check extensions
