@@ -6,16 +6,18 @@ A chess engine in a single Python file, packed to under 4 KB, for the make.fun
 **tiny-chess-01** bounty ("strongest chess engine in 4 KB of Python").
 
 `main.py` is a self-unpacking LZMA stub (the kit's `makefun compress` output)
-of a readable source file. The engine itself:
+of a readable source file. The engine itself (v7):
 
 - negamax alpha-beta search with PVS, null-move pruning, late-move
-  reductions, iterative deepening and a fixed 100,000-node budget per move —
-  no wall clock, fully deterministic
+  reductions, futility pruning, iterative deepening and a deterministic
+  phase-scaled node budget (100,000-node nominal budget, scaled by game
+  phase) — no wall clock, fully deterministic
 - transposition table (persists across moves within a game), MVV-LVA capture
-  ordering, quiescence search over captures, promotions and check evasions,
-  check extensions
+  ordering plus killer moves and a history heuristic for quiet moves,
+  quiescence search over captures, promotions and check evasions with
+  delta pruning, check extensions
 - tapered evaluation: material + piece-square tables (Simplified Evaluation
-  Function values), bishop pair
+  Function values)
 - snapshot make/unmake, zobrist hashing, repetition and fifty-move handling
 
 It speaks the competition's agent/v1 protocol: it polls the environment
